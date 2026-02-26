@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#0b5cff" />
+  <title>Superaquecimento</title>
+
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="icons/icon-192.png" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo" aria-hidden="true">SH</div>
+      <div>
+        <div class="title">Calculadora de Superaquecimento</div>
+        <div class="subtitle">Convencional x Inverter • Tsat por pressão (10–200 psi)</div>
+      </div>
+    </div>
+    <button id="btnInstall" class="btn ghost" hidden>Instalar</button>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <h2>Tipo de sistema</h2>
+      <div class="segmented" role="tablist" aria-label="Tipo de sistema">
+        <button id="btnConv" class="seg active" type="button">Convencional</button>
+        <button id="btnInv" class="seg" type="button">Inverter</button>
+      </div>
+      <p id="tipoHint" class="hint"></p>
+    </section>
+
+    <section class="card">
+      <h2>Dados</h2>
+
+      <div class="grid">
+        <label class="field">
+          <span>Gás</span>
+          <select id="gas">
+            <option>R22</option>
+            <option selected>R410A</option>
+            <option>R32</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span>Pressão (psi) <small class="muted">(obrigatório no automático)</small></span>
+          <input id="psi" inputmode="decimal" placeholder="Ex: 135" />
+        </label>
+
+        <label class="field">
+          <span>Temp. sucção (°C)</span>
+          <input id="tsuc" inputmode="decimal" placeholder="Ex: 15" />
+        </label>
+
+        <label class="field">
+          <span>Temp. saturação (°C)</span>
+          <input id="tsat" inputmode="decimal" placeholder="Ex: 5" />
+          <small class="muted" id="tsatAutoInfo" style="display:none; margin-top:6px; display:block;">
+            Tsat calculada automaticamente pela pressão.
+          </small>
+        </label>
+      </div>
+
+      <div class="row">
+        <label class="check">
+          <input id="autoTsat" type="checkbox" />
+          <span>Calcular Tsat pela pressão (10–200 psi, passo 1)</span>
+        </label>
+        <span class="pill" id="autoBadge">Manual</span>
+      </div>
+
+      <div class="actions">
+        <button id="btnCalc" class="btn primary" type="button">Calcular</button>
+        <button id="btnClear" class="btn" type="button">Limpar</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Resultado</h2>
+
+      <div class="result">
+        <div class="big" id="shOut">— °C</div>
+        <div class="meta">
+          <div id="faixaOut" class="line">Faixa esperada: —</div>
+          <div id="statusOut" class="line">Status: —</div>
+        </div>
+      </div>
+
+      <div id="alertBox" class="alert neutral">
+        <div class="alert-title">Orientação</div>
+        <div id="alertText" class="alert-text">
+          Selecione o tipo de sistema e preencha os dados para avaliar com segurança.
+        </div>
+      </div>
+
+      <details class="details">
+        <summary>Notas rápidas</summary>
+        <ul>
+          <li><b>Convencional</b>: SH é referência principal para ajuste/diagnóstico (condições estabilizadas).</li>
+          <li><b>Inverter</b>: carga correta é por <b>peso</b> (etiqueta). SH varia com modulação e é conferência.</li>
+          <li><b>Automático</b>: Tsat é obtida por tabela PT interna (10–200 psi) com passo 1 psi.</li>
+        </ul>
+      </details>
+    </section>
+
+    <footer class="footer">
+      <small>v2.1 • Offline (PWA)</small>
+    </footer>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
